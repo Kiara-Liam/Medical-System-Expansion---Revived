@@ -22,15 +22,15 @@
   <ThingDef ParentName="BodyPartArchotechBase">
     <defName>ArchotechInternalSupport</defName>
     <label>archotech internal support</label>
-    <description>An artificial internal support built by an archotech. Useful replacement to have on hand for when an archotech arm or leg breaks.</description>
+    <description>An artificial internal support built by an archotech. Useful replacement to have on hand for when an internal component of an archotech prosthesis breaks.</description>
     <descriptionHyperlinks>
       <RecipeDef>InstallArchotechInternalSupport</RecipeDef>
     </descriptionHyperlinks>
     <thingSetMakerTags>
-      <li>RewardStandardMidFreq</li>
+      <li>RewardStandardLowFreq</li>
     </thingSetMakerTags>
     <statBases>
-      <MarketValue>400</MarketValue>
+      <MarketValue>350</MarketValue>
       <Mass>0.3</Mass>
     </statBases>
   </ThingDef>
@@ -107,11 +107,8 @@
     <descriptionHyperlinks>
       <RecipeDef>InstallArchotechForearm</RecipeDef>
     </descriptionHyperlinks>
-    <costList>
-      <Plasteel>12</Plasteel>
-      <ComponentSpacer>3</ComponentSpacer>
-    </costList>
     <statBases>
+      <MarketValue>2100</MarketValue>
       <Mass>4</Mass>
     </statBases>
     <comps>
@@ -180,7 +177,7 @@
       <RecipeDef>InstallArchotechFoot</RecipeDef>
     </descriptionHyperlinks>
     <statBases>
-      <MarketValue>1600</MarketValue>
+      <MarketValue>1350</MarketValue>
       <Mass>1.5</Mass>
     </statBases>
     <comps>
@@ -251,7 +248,7 @@
       <RecipeDef>InstallArchotechToe</RecipeDef>
     </descriptionHyperlinks>
     <statBases>
-      <MarketValue>300</MarketValue>
+      <MarketValue>200</MarketValue>
       <Mass>0.05</Mass>
     </statBases>
   </ThingDef>
@@ -317,7 +314,7 @@
       <RecipeDef>InstallArchotechHand</RecipeDef>
     </descriptionHyperlinks>
     <statBases>
-      <MarketValue>2000</MarketValue>
+      <MarketValue>1200</MarketValue>
       <Mass>1</Mass>
     </statBases>
     <comps>
@@ -388,7 +385,7 @@
       <RecipeDef>InstallArchotechFinger</RecipeDef>
     </descriptionHyperlinks>
     <statBases>
-      <MarketValue>380</MarketValue>
+      <MarketValue>300</MarketValue>
       <Mass>0.1</Mass>
     </statBases>
   </ThingDef>

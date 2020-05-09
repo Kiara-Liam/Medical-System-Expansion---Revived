@@ -1,38 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Patch>
-
 	<Operation Class="PatchOperationFindMod">
 		<mods>
-			<li>Expanded Prosthetics and Organ Engineering</li>
+			<li>Rah's Bionics and Surgery Expansion</li>
 		</mods>
 		<match Class="PatchOperationSequence">
 			<operations>
-
-				<li Class="PatchOperationAdd">
-					<xpath>/Defs/HediffDef[@Name="addedPartBionics"]</xpath>
-					<value>
-						<priceImpact>true</priceImpact>
-					</value>
-				</li>
-
-				<!-- remove verbs -->
-				<li Class="PatchOperationRemove">
-					<xpath>/Defs/HediffDef[@ParentName="addedPartBionics"][defName="PowerArm"]/comps/li[@Class="HediffCompProperties_VerbGiver"]</xpath>
-				</li>
-
 				<!-- power arm -->
-
-				<li Class="PatchOperationAddOrMerge">
-					<xpath>/Defs/HediffDef[@ParentName="addedPartBionics"][defName="PowerArm"]</xpath>
-					<value>
-						<comps>
-							<li Class="MSE2.HediffCompProperties_ModuleHolder">
-								<maxModules>1</maxModules>
-							</li>
-						</comps>
-					</value>
-				</li>
-
 				<li Class="PatchOperationAddOrMerge">
 					<xpath>/Defs/ThingDef[@ParentName="Bionic"][defName="PowerArm"]</xpath>
 					<value>
@@ -47,40 +21,17 @@
 					</value>
 				</li>
 
-				<!-- bionic arm -->
-
-				<li Class="PatchOperationAddOrMerge">
-					<xpath>/Defs/ThingDef[@ParentName="Bionic"][defName="BionicArm"]</xpath>
-					<value>
-						<comps>
-							<li Class="MSE2.CompProperties_IncludedChildParts">
-								<standardChildren>
-									<li>BionicForearm</li>
-									<li>BionicInternalSupport</li>
-								</standardChildren>
-							</li>
-						</comps>
-					</value>
-				</li>
-
-				<!-- bionic leg -->
-
-				<li Class="PatchOperationAddOrMerge">
-					<xpath>/Defs/ThingDef[@ParentName="Bionic"][defName="BionicLeg"]</xpath>
-					<value>
-						<comps>
-							<li Class="MSE2.CompProperties_IncludedChildParts">
-								<standardChildren>
-									<li>BionicFoot</li>
-									<li>BionicInternalSupport</li>
-									<li>BionicInternalSupport</li>
-								</standardChildren>
-							</li>
-						</comps>
-					</value>
-				</li>
-
 				<!-- bionic hand -->
+				<li Class="PatchOperationAddOrMerge">
+					<xpath>/Defs/HediffDef[@ParentName="addedPartBionics"][defName="BionicHand"]</xpath>
+					<value>
+						<comps>
+							<li Class="MSE2.HediffCompProperties_ModuleHolder">
+								<maxModules>1</maxModules>
+							</li>
+						</comps>
+					</value>
+				</li>
 
 				<li Class="PatchOperationAddOrMerge">
 					<xpath>/Defs/ThingDef[@ParentName="Bionic"][defName="BionicHand"]</xpath>
@@ -98,16 +49,8 @@
 						</comps>
 					</value>
 				</li>
-				
-				<li Class="PatchOperationAdd">
-					<xpath>/Defs/ThingDef[@ParentName="Bionic"][defName="BionicHand"]/statBases</xpath>
-					<value>
-						<WorkToMake>3000</WorkToMake>
-					</value>
-				</li>
 
 				<!-- bionic foot -->
-
 				<li Class="PatchOperationAddOrMerge">
 					<xpath>/Defs/ThingDef[@ParentName="Bionic"][defName="BionicFoot"]</xpath>
 					<value>
@@ -125,21 +68,43 @@
 					</value>
 				</li>
 
-				<li Class="PatchOperationAdd">
-					<xpath>/Defs/ThingDef[@ParentName="Bionic"][defName="BionicFoot"]/statBases</xpath>
+				<!-- bionic arm -->
+				<li Class="PatchOperationAddOrMerge">
+					<xpath>/Defs/ThingDef[@ParentName="Bionic"][defName="BionicArm"]</xpath>
 					<value>
-						<WorkToMake>2800</WorkToMake>
+						<comps>
+							<li Class="MSE2.CompProperties_IncludedChildParts">
+								<standardChildren>
+									<li>BionicForearm</li>
+									<li>BionicInternalSupport</li>
+								</standardChildren>
+							</li>
+						</comps>
+					</value>
+				</li>
+
+				<!-- bionic leg -->
+				<li Class="PatchOperationAddOrMerge">
+					<xpath>/Defs/ThingDef[@ParentName="Bionic"][defName="BionicLeg"]</xpath>
+					<value>
+						<comps>
+							<li Class="MSE2.CompProperties_IncludedChildParts">
+								<standardChildren>
+									<li>BionicFoot</li>
+									<li>BionicInternalSupport</li>
+									<li>BionicInternalSupport</li>
+								</standardChildren>
+							</li>
+						</comps>
 					</value>
 				</li>
 
 				<!-- adding new parts -->
-
 				<li Class="PatchOperationAdd">
 					<xpath>/Defs</xpath>
 					<value>
 
 						<!-- internal support -->
-
 						<HediffDef ParentName="addedPartBionics">
 							<defName>BionicInternalSupport</defName>
 							<label>bionic internal support</label>
@@ -170,7 +135,6 @@
 								<li>RewardStandardMidFreq</li>
 							</thingSetMakerTags>
 							<statBases>
-								<WorkToMake>1500</WorkToMake>
 								<Mass>0.3</Mass>
 							</statBases>
 						</ThingDef>
@@ -183,6 +147,7 @@
 								<ThingDef>BionicInternalSupport</ThingDef>
 							</descriptionHyperlinks>
 							<jobString>Installing bionic internal support.</jobString>
+							<workerClass>MSE2.Recipe_InstallArtificialBodyPartWithChildren</workerClass>
 							<ingredients>
 								<li>
 									<filter>
@@ -220,7 +185,6 @@
 						</RecipeDef>
 
 						<!-- bionic finger -->
-
 						<HediffDef ParentName="addedPartBionics">
 							<defName>BionicFinger</defName>
 							<label>bionic finger</label>
@@ -247,7 +211,6 @@
 								<ComponentIndustrial>1</ComponentIndustrial>
 							</costList>
 							<statBases>
-								<WorkToMake>525</WorkToMake>
 								<Mass>0.1</Mass>
 							</statBases>
 						</ThingDef>
@@ -260,6 +223,7 @@
 								<ThingDef>BionicFinger</ThingDef>
 							</descriptionHyperlinks>
 							<jobString>Installing bionic finger.</jobString>
+							<workerClass>MSE2.Recipe_InstallArtificialBodyPartWithChildren</workerClass>
 							<ingredients>
 								<li>
 									<filter>
@@ -282,7 +246,6 @@
 						</RecipeDef>
 
 						<!-- toes -->
-
 						<HediffDef ParentName="addedPartBionics">
 							<defName>BionicToe</defName>
 							<label>bionic toe</label>
@@ -308,8 +271,10 @@
 								<Plasteel>2</Plasteel>
 								<ComponentIndustrial>1</ComponentIndustrial>
 							</costList>
+							<thingSetMakerTags>
+								<li>RewardStandardMidFreq</li>
+							</thingSetMakerTags>
 							<statBases>
-								<WorkToMake>375</WorkToMake>
 								<Mass>0.05</Mass>
 							</statBases>
 						</ThingDef>
@@ -322,6 +287,7 @@
 								<ThingDef>BionicToe</ThingDef>
 							</descriptionHyperlinks>
 							<jobString>Installing bionic toe.</jobString>
+							<workerClass>MSE2.Recipe_InstallArtificialBodyPartWithChildren</workerClass>
 							<ingredients>
 								<li>
 									<filter>
@@ -344,7 +310,6 @@
 						</RecipeDef>
 
 						<!-- bionic forearm -->
-
 						<HediffDef ParentName="addedPartBionics">
 							<defName>BionicForearm</defName>
 							<label>bionic arm</label>
@@ -368,11 +333,10 @@
 							</descriptionHyperlinks>
 							<costList>
 								<SimpleProstheticArm>1</SimpleProstheticArm>
-								<Plasteel>30</Plasteel>
+								<Plasteel>45</Plasteel>
 								<ComponentIndustrial>5</ComponentIndustrial>
 							</costList>
 							<statBases>
-								<WorkToMake>5250</WorkToMake>
 								<Mass>4</Mass>
 							</statBases>
 							<comps>
@@ -394,6 +358,7 @@
 								<ThingDef>BionicForearm</ThingDef>
 							</descriptionHyperlinks>
 							<jobString>Installing bionic forearm.</jobString>
+							<workerClass>MSE2.Recipe_InstallArtificialBodyPartWithChildren</workerClass>
 							<ingredients>
 								<li>
 									<filter>
@@ -416,7 +381,6 @@
 						</RecipeDef>
 
 						<!-- power forearm -->
-
 						<HediffDef ParentName="addedPartBionics">
 							<defName>PowerForearm</defName>
 							<label>power arm</label>
@@ -449,7 +413,6 @@
 								<Plasteel>25</Plasteel>
 							</costList>
 							<statBases>
-								<WorkToMake>5250</WorkToMake>
 								<Mass>4.5</Mass>
 							</statBases>
 							<comps>
@@ -471,6 +434,7 @@
 								<ThingDef>PowerForearm</ThingDef>
 							</descriptionHyperlinks>
 							<jobString>Installing power forearm.</jobString>
+							<workerClass>MSE2.Recipe_InstallArtificialBodyPartWithChildren</workerClass>
 							<ingredients>
 								<li>
 									<filter>
@@ -493,7 +457,6 @@
 						</RecipeDef>
 
 						<!-- power hand -->
-
 						<HediffDef ParentName="addedPartBionics">
 							<defName>PowerHand</defName>
 							<label>power hand</label>
@@ -526,7 +489,6 @@
 								<Plasteel>12</Plasteel>
 							</costList>
 							<statBases>
-								<WorkToMake>3000</WorkToMake>
 								<Mass>3.5</Mass>
 							</statBases>
 							<comps>
@@ -551,6 +513,7 @@
 								<ThingDef>PowerHand</ThingDef>
 							</descriptionHyperlinks>
 							<jobString>Installing power hand.</jobString>
+							<workerClass>MSE2.Recipe_InstallArtificialBodyPartWithChildren</workerClass>
 							<ingredients>
 								<li>
 									<filter>
@@ -573,7 +536,6 @@
 						</RecipeDef>
 
 						<!-- power claw -->
-
 						<RecipeDef ParentName="MSE_SurgeryInstallModuleBase">
 							<defName>InstallPowerClaw</defName>
 							<label>install power claw module</label>
@@ -607,7 +569,6 @@
 				</li>
 
 				<!-- melee verbs on power hand -->
-
 				<li Class="PatchOperationFindMod">
 					<mods>
 						<li>Combat Extended</li>
@@ -653,8 +614,11 @@
 					</nomatch>
 				</li>
 
+				<!-- remove verbs -->
+				<li Class="PatchOperationRemove">
+					<xpath>/Defs/HediffDef[@ParentName="addedPartBionics"][defName="BionicArm"]/comps/li[@Class="HediffCompProperties_VerbGiver"]</xpath>
+				</li>
 			</operations>
 		</match>
 	</Operation>
-
 </Patch>

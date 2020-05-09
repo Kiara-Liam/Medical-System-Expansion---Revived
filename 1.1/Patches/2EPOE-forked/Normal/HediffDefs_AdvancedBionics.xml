@@ -366,6 +366,9 @@
 							<statBases>
 								<Mass>4</Mass>
 							</statBases>
+							<techHediffsTags>
+								<li>AdvancedWeapon</li>
+							</techHediffsTags>
 							<comps>
 								<li Class="MSE2.CompProperties_IncludedChildParts">
 									<standardChildren>
@@ -471,13 +474,16 @@
 							<costList>
 								<ScytherBlade>3</ScytherBlade>
 								<Steel>35</Steel>
-								<Plasteel>75</Plasteel>
+								<Plasteel>70</Plasteel>
 								<ComponentIndustrial>5</ComponentIndustrial>
 								<ComponentSpacer>3</ComponentSpacer>
 							</costList>
 							<statBases>
 								<Mass>3.5</Mass>
 							</statBases>
+							<techHediffsTags>
+								<li>AdvancedWeapon</li>
+							</techHediffsTags>
 							<comps>
 								<li Class="MSE2.CompProperties_IncludedChildParts">
 									<standardChildren>

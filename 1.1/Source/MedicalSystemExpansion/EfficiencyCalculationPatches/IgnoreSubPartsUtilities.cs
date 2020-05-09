@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RimWorld;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -34,11 +35,11 @@ namespace MSE2
             yield break;
         }
 
-        private static List<BodyPartDef> AllChildPartDefs ( this BodyPartDef bodyPartDef )
+        private static List<BodyPartDef> AllChildPartDefs ( this BodyPartDef bodyPartDef, IEnumerable<BodyDef> bodies = null )
         {
             List<BodyPartDef> list = new List<BodyPartDef>();
 
-            foreach ( var bodyDef in DefDatabase<BodyDef>.AllDefs )
+            foreach ( var bodyDef in bodies ?? DefDatabase<BodyDef>.AllDefs )
             {
                 foreach ( var partRecord in bodyDef.AllParts )
                 {
@@ -88,23 +89,27 @@ namespace MSE2
                         if ( modExt.ignoredSubParts == null )
                             modExt.ignoredSubParts = new List<BodyPartDef>();
 
-                        modExt.ignoredSubParts.AddRange( partDef.AllChildPartDefs() );
+                        modExt.ignoredSubParts.AddRange( partDef.AllChildPartDefs( recipeDef.AllRecipeUsers.Select( ru => ru.race.body ) ) );
                     }
 
                 // found any
                 if ( !modExt.ignoredSubParts.NullOrEmpty() )
                 {
-                    if ( Prefs.LogVerbose )
-                        Log.Message( "[MSE2] Part <" + recipeDef.addsHediff.defName + "> from \"" + (recipeDef.modContentPack?.Name ?? "???") + "\", has no standard subparts. Automatically ignoring: " + string.Join( ", ", modExt.ignoredSubParts.Select( p => p.label ) ) + "." );
-
+                    // add the modextension
                     if ( recipeDef.addsHediff.modExtensions == null )
                         recipeDef.addsHediff.modExtensions = new List<DefModExtension>();
 
-                    // add the modextension
                     recipeDef.addsHediff.modExtensions.Add( modExt );
 
-                    if ( !brokenMods.Contains( recipeDef.modContentPack?.Name ) )
-                        brokenMods.Add( recipeDef.modContentPack?.Name );
+                    // log only for humanlike
+                    if ( recipeDef.AllRecipeUsers.Any( td => td.race.Humanlike ) )
+                    {
+                        if ( Prefs.LogVerbose )
+                            Log.Message( "[MSE2] Part <" + recipeDef.addsHediff.defName + "> from \"" + (recipeDef.modContentPack?.Name ?? "???") + "\", has no standard subparts. Automatically ignoring: " + string.Join( ", ", modExt.ignoredSubParts.Select( p => p.label ) ) + "." );
+
+                        if ( !brokenMods.Contains( recipeDef.modContentPack?.Name ) )
+                            brokenMods.Add( recipeDef.modContentPack?.Name );
+                    }
                 }
             }
 
